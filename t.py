@@ -24,7 +24,7 @@ class Ui_MainWindow(object):
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_2.setGeometry(QtCore.QRect(310, 340, 112, 34))
         self.pushButton_2.setObjectName("pushButton_2")
-        self.pushButton_2.clicked.connect(test2.test2)
+        self.pushButton_2.clicked.connect(test2.cam_test)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 31))
