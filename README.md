@@ -11,6 +11,9 @@ pip install opencv-python
 pip install cmake
 pip install dlib
 ```
+```buildoutcfg
+pip install tensorflow-cpu
+```
 ## run
 ```buildoutcfg
 run t.py
