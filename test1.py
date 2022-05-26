@@ -10,6 +10,7 @@
 import os
 import sys
 from Ui_8page import Ui_8page
+from webcam import Ui_Webcam
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -19,13 +20,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(786, 585)
+        MainWindow.resize(629, 652)
+        self.mainwindow = MainWindow
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(100, 160, 251, 221))
         self.pushButton.setObjectName("pushButton")
-        self.pushButton.clicked.connect(self.shownextpage)
+        self.pushButton.clicked.connect(self.sign_in)
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_2.setGeometry(QtCore.QRect(450, 160, 231, 221))
         self.pushButton_2.setObjectName("pushButton_2")
@@ -42,9 +44,16 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.setTabOrder(self.pushButton, self.pushButton_2)
         
-    def shownextpage(self):
-       self.second= Ui_8page()
-       self.second.setupUi(MainWindow)
+    def sign_in(self):
+        #self.mainwindow.hide()
+        self.signin_window = QtWidgets.QMainWindow()
+        self.second= Ui_8page()
+        self.second.setupUi(self.signin_window)
+        self.signin_window.show()
+
+        print("3.5")
+        print("4")
+        #self.mainwindow.show()
 
     def r(self):
         self.setupUi(MainWindow)

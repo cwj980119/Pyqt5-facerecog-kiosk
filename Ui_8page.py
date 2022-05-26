@@ -10,11 +10,13 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
+from webcam import Ui_Webcam
 
 class Ui_8page(object):
     def setupUi(self, sMainWindow):
         sMainWindow.setObjectName("Ui_8page")
         sMainWindow.resize(629, 652)
+        self.window = sMainWindow
         self.centralwidget = QtWidgets.QWidget(sMainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.textEdit = QtWidgets.QTextEdit(self.centralwidget)
@@ -23,10 +25,11 @@ class Ui_8page(object):
         self.pushbutton = QtWidgets.QToolButton(self.centralwidget)
         self.pushbutton.setGeometry(QtCore.QRect(240, 460, 151, 91))
         self.pushbutton.setObjectName("pushbutton")
+        self.pushbutton.clicked.connect(self.take_pic)
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_2.setGeometry(QtCore.QRect(510, 540, 121, 71))
         self.pushButton_2.setObjectName("pushButton_2")
-        self.pushButton_2.clicked.connect(self.re)
+        self.pushButton_2.clicked.connect(self.close_window)
         self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit.setGeometry(QtCore.QRect(110, 90, 431, 61))
         self.lineEdit.setObjectName("lineEdit")
@@ -71,10 +74,16 @@ class Ui_8page(object):
 
         self.retranslateUi(sMainWindow)
         QtCore.QMetaObject.connectSlotsByName(sMainWindow)
-        
-    def re(self):
-        a = Ui_MainWindow()
-        a.r()
+
+    def take_pic(self):
+        self.picture_window = QtWidgets.QMainWindow()
+        self.picture= Ui_Webcam()
+        self.picture.setupUi(self.picture_window)
+        self.picture_window.show()
+
+    def close_window(self):
+        self.window.close()
+
         
 
     def retranslateUi(self, sMainWindow):

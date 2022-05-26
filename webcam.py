@@ -15,7 +15,7 @@ from keras.models import load_model
 
 #load_model = load_model('tl_20_cropped_e20_b200.h5')
 
-class Ui_MainWindow(object):
+class Ui_Webcam(object):
     working = False
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -30,6 +30,10 @@ class Ui_MainWindow(object):
         self.pushButton.setGeometry(QtCore.QRect(310, 500, 112, 34))
         self.pushButton.setObjectName("pushButton")
         self.pushButton.clicked.connect(self.start_cam)
+        self.pushButton2 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton2.setGeometry(QtCore.QRect(310, 550, 112, 34))
+        self.pushButton2.setObjectName("pushButton2")
+        self.pushButton2.clicked.connect(self.close_cam)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 22))
@@ -86,16 +90,20 @@ class Ui_MainWindow(object):
         th = threading.Thread(target=self.setCam)
         th.start()
 
+    def close_cam(self):
+        self.working = False
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButton.setText(_translate("MainWindow", "Cam_On"))
+        self.pushButton2.setText(_translate("MainWindow", "Cam_Off"))
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
+    ui = Ui_Webcam()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
