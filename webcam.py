@@ -13,7 +13,7 @@ import dlib,cv2, threading
 import numpy as np
 from keras.models import load_model
 
-load_model = load_model('tl_20_cropped_e20_b200.h5')
+#load_model = load_model('tl_20_cropped_e20_b200.h5')
 
 class Ui_MainWindow(object):
     working = False
@@ -65,11 +65,11 @@ class Ui_MainWindow(object):
 
                 image = np.expand_dims(image, 0)
                 # print(image.shape)
-                a = load_model.predict(image)
-                # print(a)
-                if np.argmax(a) > 0.9:
-                    print(np.argmax(a),"th user")
-                    print(a)
+                # #a = load_model.predict(image)
+                # # print(a)
+                # if np.argmax(a) > 0.9:
+                #     print(np.argmax(a),"th user")
+                #     print(a)
 
 
             cvt_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
