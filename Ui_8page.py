@@ -37,18 +37,22 @@ class Ui_8page(object):
         #self.textEdit.setGeometry(QtCore.QRect(190, 0, 256, 71))
         #self.textEdit.setObjectName("textEdit")
         
+        
+        #회원가입창
         self.textBrowser = QtWidgets.QTextBrowser(self.centralwidget)
         self.textBrowser.setGeometry(QtCore.QRect(180, 0, 256, 51))
         self.textBrowser.setObjectName("textBrowser")
-        
+        #사진촬영버튼
         self.pushbutton = QtWidgets.QToolButton(self.centralwidget)
         self.pushbutton.setGeometry(QtCore.QRect(240, 460, 151, 91))
         self.pushbutton.setObjectName("pushbutton")
         self.pushbutton.clicked.connect(self.take_pic)
+        #
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_2.setGeometry(QtCore.QRect(510, 540, 121, 71))
         self.pushButton_2.setObjectName("pushButton_2")
         self.pushButton_2.clicked.connect(self.close_window)
+        
         self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit.setGeometry(QtCore.QRect(110, 90, 431, 61))
         self.lineEdit.setObjectName("lineEdit")
@@ -102,7 +106,36 @@ class Ui_8page(object):
         
         #DB연결
         
-        db_name=self.textEdit.toPlainText()
+        db_name=self.lineEdit.text()
+        password1=self.lineEdit_2.text()
+        #password2=self.lineEdit_3.text()
+        db_birthday=self.lineEdit_4.text()
+        db_malefemale=self.lineEdit_5.text()
+        db_phonenumber=self.lineEdit_3.text()
+        
+        sql="INSERT INTO memberdata (memberID, name, password, birthdate, male/female, phonenumber) VALUES ('%s', '%s', '%s', '%s',%s,'%s')"
+        
+        
+        #if password1==password2:
+        if password1==db_phonenumber:    
+            if db_malefemale=="여":
+                db_malefemale=0
+            else:
+                db_malefemale=1
+            db_password=password1
+            conn = connectDB()
+            curs = conn.cursor()
+            curs.execute(sql,(db_name, db_password, db_birthday, db_malefemale, db_phonenumber))
+        else:
+             self.lineEdit.setText("")
+             self.lineEdit_2.setText("")
+             self.lineEdit_3.setText("")
+             self.lineEdit_4.setText("")
+             self.lineEdit_5.setText("")
+             self.lineEdit_6.setText("")
+        
+        curs.close()
+        disconnnet(conn)
 
     def close_window(self):
         self.window.close()
