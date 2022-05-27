@@ -1,9 +1,16 @@
 import pymysql
+import sys
+import os
+import requests
+import base64
 
-db=pymysql.connect(host="localhost",user="root", password="ksc2021583", charset="utf8")
-print(db)
+host="database-1.cb5pctivsgrb.us-east-1.rds.amazonaws.com"
+username="root"
+port=3306
+database="log-in"
+password="ksc2021583"
+
+db=pymysql.connect(host,username,password)
+    
 cursor=db.cursor()
-cursor.execute('USE classicmodels;')
-
-db.commit()
-db.close()
+print(cursor)

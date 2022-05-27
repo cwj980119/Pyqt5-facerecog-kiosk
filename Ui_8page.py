@@ -11,6 +11,20 @@ import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 from webcam import Ui_Webcam
+import pymysql
+
+def connectDB():
+    host="database-1.cb5pctivsgrb.us-east-1.rds.amazonaws.com"
+    username="root"
+    port=3306
+    database="log-in"
+    password="ksc2021583"
+
+    conn=pymysql.connect(host=host,user=username,password=password,db=database,port=port)
+    return(conn)
+
+def disconnnetDB(conn):
+    conn.close()
 
 class Ui_8page(object):
     def setupUi(self, sMainWindow):
@@ -19,9 +33,14 @@ class Ui_8page(object):
         self.window = sMainWindow
         self.centralwidget = QtWidgets.QWidget(sMainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.textEdit = QtWidgets.QTextEdit(self.centralwidget)
-        self.textEdit.setGeometry(QtCore.QRect(190, 0, 256, 71))
-        self.textEdit.setObjectName("textEdit")
+        #self.textEdit = QtWidgets.QTextEdit(self.centralwidget)
+        #self.textEdit.setGeometry(QtCore.QRect(190, 0, 256, 71))
+        #self.textEdit.setObjectName("textEdit")
+        
+        self.textBrowser = QtWidgets.QTextBrowser(self.centralwidget)
+        self.textBrowser.setGeometry(QtCore.QRect(180, 0, 256, 51))
+        self.textBrowser.setObjectName("textBrowser")
+        
         self.pushbutton = QtWidgets.QToolButton(self.centralwidget)
         self.pushbutton.setGeometry(QtCore.QRect(240, 460, 151, 91))
         self.pushbutton.setObjectName("pushbutton")
@@ -80,6 +99,10 @@ class Ui_8page(object):
         self.picture= Ui_Webcam()
         self.picture.setupUi(self.picture_window)
         self.picture_window.show()
+        
+        #DB연결
+        
+        db_name=self.textEdit.toPlainText()
 
     def close_window(self):
         self.window.close()
@@ -89,7 +112,8 @@ class Ui_8page(object):
     def retranslateUi(self, sMainWindow):
         _translate = QtCore.QCoreApplication.translate
         sMainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.textEdit.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.textBrowser.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        #self.textEdit.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Gulim\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
@@ -103,6 +127,7 @@ class Ui_8page(object):
         self.label_4.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:16pt; color:#b5b5b5;\">비밀번호를 다시 입력해주세요</span></p></body></html>"))
         self.label_5.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:16pt; color:#b5b5b5;\">생년월일을 입력해주세요</span><span style=\" font-size:12pt; color:#b5b5b5;\">(ex:19990909)</span></p></body></html>"))
         self.label_6.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:16pt; color:#b5b5b5;\">휴대폰번호를 입력해주세요</span></p></body></html>"))
+        
 
  
        
