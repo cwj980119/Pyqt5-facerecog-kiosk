@@ -25,7 +25,7 @@ def connectDB():
     conn=pymysql.connect(host=host,user=username,password=password,db=database,port=port)
     return(conn)
 
-def disconnnetDB(conn):
+def disconnectDB(conn):
     conn.close()
     
 class Ui_register(object):
@@ -129,33 +129,42 @@ class Ui_register(object):
         password1=self.lineEdit_2.text()
         password2=self.lineEdit_3.text()
         db_birthdate=self.lineEdit_4.text()
-        db_malefemale=self.lineEdit_5.text()
+        gender=self.lineEdit_5.text()
         db_phonenumber=self.lineEdit_6.text()
         
-        sql="INSERT INTO memberdata ( name, password, birthdate, male/female, phonenumber) VALUES ( '%s', '%s', '%s', %s, '%s')"
+        sql="INSERT INTO memberdata ( name, password, birthdate, gender, phonenumber) VALUES ( %s, %s, %s, '%s', %s)"
+        print("1") 
         
-        
-        #if password1==password2:
+       
         if password1==password2:    
-            if db_malefemale=="여":
-                db_malefemale=0
-            else:
-                db_malefemale=1
-                
+            if gender=="여":
+                db_gender=False
+            elif gender=="남":
+                db_gender=True
+                   
             db_password=password1
             conn = connectDB()
             curs = conn.cursor()
-            curs.execute(sql,("db_name", "db_password", "db_birthdate", db_malefemale, "db_phonenumber"))
+            
+            val=( db_name, db_password, db_birthdate, db_gender, db_phonenumber)
+            
+            curs.execute(sql,val)
+            print("3")
+            result = curs.fetchone()
+            print(val)
+            conn.commit()
+            
+           
         else:
-             self.lineEdit_1.setText("")
-             self.lineEdit_2.setText("")
-             self.lineEdit_3.setText("")
-             self.lineEdit_4.setText("")
-             self.lineEdit_5.setText("")
-             self.lineEdit_6.setText("")
+            self.lineEdit_1.setText("")
+            self.lineEdit_2.setText("")
+            self.lineEdit_3.setText("")                
+            self.lineEdit_4.setText("")
+            self.lineEdit_5.setText("")
+            self.lineEdit_6.setText("")
         
         curs.close()
-        disconnnet(conn)
+        disconnectDB(conn)
         
     def close_window(self):
         self.window.close()
