@@ -13,6 +13,7 @@ pip install dlib
 ```
 ```buildoutcfg
 pip install tensorflow-cpu
+pip install pymysql
 ```
 ## run
 ```buildoutcfg
