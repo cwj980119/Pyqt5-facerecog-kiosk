@@ -9,7 +9,7 @@
 
 import os
 import sys
-from Ui_8page import Ui_8page
+import registertest
 from webcam import Ui_Webcam
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
@@ -47,7 +47,7 @@ class Ui_MainWindow(object):
     def sign_in(self):
         #self.mainwindow.hide()
         self.signin_window = QtWidgets.QMainWindow()
-        self.second= Ui_8page()
+        self.second= registertest.Ui_register()
         self.second.setupUi(self.signin_window)
         self.signin_window.show()
 
