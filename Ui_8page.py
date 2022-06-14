@@ -112,7 +112,7 @@ class Ui_8page(object):
         db_birthday=self.lineEdit_4.text()
         db_malefemale=self.lineEdit_5.text()
         db_phonenumber=self.lineEdit_3.text()
-        
+        print("err")
         sql="INSERT INTO memberdata (memberID, name, password, birthdate, male/female, phonenumber) VALUES ('%s', '%s', '%s', '%s',%s,'%s')"
         
         

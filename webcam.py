@@ -19,7 +19,7 @@ class Ui_Webcam(object):
     working = False
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 900)
+        MainWindow.resize(900, 1200)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.cam = QtWidgets.QLabel(self.centralwidget)

@@ -133,7 +133,7 @@ class Ui_register(object):
         db_phonenumber=self.lineEdit_6.text()
         
         sql="INSERT INTO memberdata ( name, password, birthdate, gender, phonenumber) VALUES ( %s, %s, %s, '%s', %s)"
-        print("1") 
+        print("100")
         
        
         if password1==password2:    
