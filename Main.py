@@ -5,6 +5,18 @@ import numpy as np
 from PyQt5.QtWidgets import *
 from PyQt5 import uic,QtWidgets, QtGui
 from keras.models import load_model
+import pymysql
+
+
+def connectDB():
+    host="database-1.cb5pctivsgrb.us-east-1.rds.amazonaws.com"
+    username="root"
+    port=3306
+    database="log-in"
+    password="ksc2021583"
+
+    conn=pymysql.connect(host=host,user=username,password=password,db=database,port=port)
+    return(conn)
 
 load_model = load_model('tl_20_cropped_e20_b200.h5')
 
@@ -26,12 +38,23 @@ class Login(QWidget):
     def __init__(self, main):
         QWidget.__init__(self)
         self.main = main
-        self.ui = uic.loadUi("./UI/login.ui")
-        self.ui.to_main.clicked.connect(self.close)
-        self.ui.cam_on.clicked.connect(self.start_cam)
-        self.ui.cam_off.clicked.connect(self.close_cam)
-        self.ui.show()
+        try:
+            conn = connectDB()
+            self.curs = conn.cursor()
+            self.curs.execute("select count(*) from userdata")
+            result = self.curs.fetchone()
+            self.user_num = result[0]
+            print(self.user_num)
+            self.ui = uic.loadUi("./UI/login.ui")
+            self.ui.to_main.clicked.connect(self.close)
+            self.ui.cam_on.clicked.connect(self.start_cam)
+            self.ui.cam_off.clicked.connect(self.close_cam)
+            self.ui.show()
+        except:
+            conn.close()
+            self.close()
     def close(self):
+        self.close_cam()
         self.main.toMain()
         self.ui.hide()
 
@@ -41,6 +64,8 @@ class Login(QWidget):
         width = cam.get(cv2.CAP_PROP_FRAME_WIDTH)
         height = cam.get(cv2.CAP_PROP_FRAME_HEIGHT)
         print(round(width), height)
+        count = 0
+        user_list = [0 for i in range(self.user_num)]
         while self.working:
             img, frame = cam.read()
             face = detector(frame)
@@ -59,10 +84,20 @@ class Login(QWidget):
                 image = np.expand_dims(image, 0)
                 # print(image.shape)
                 a = load_model.predict(image)
-                # print(a)
-                if np.argmax(a) > 0.9:
-                    print(np.argmax(a),"th user")
-                    print(a)
+                #print(a[0][np.argmax(a)])
+                if a[0][np.argmax(a)] > 0.9:
+                    count+=1
+                    user_list[np.argmax(a)] += 1
+                    #print(np.argmax(a),"th user")
+                    if count>20:
+                        print(user_list)
+                        a = user_list
+                        a.sort(reverse=True)
+                        self.close_cam()
+                        print(a[0])
+                        print(user_list)
+                        print(user_list.index(a[0]))
+                    #print(a)
 
 
             cvt_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -71,7 +106,6 @@ class Login(QWidget):
             pixmap = QtGui.QPixmap.fromImage(qImg)
             self.ui.cam.resize(round(width), round(height))
             self.ui.cam.setPixmap(pixmap)
-            print("1")
 
     def start_cam(self):
         print("start")
@@ -81,6 +115,10 @@ class Login(QWidget):
 
     def close_cam(self):
         self.working = False
+
+    def success_login(self):
+        self.close_cam()
+
 
 
 if __name__ == '__main__':
