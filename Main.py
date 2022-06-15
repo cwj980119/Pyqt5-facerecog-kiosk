@@ -36,6 +36,7 @@ class Thread(QThread):
         print(round(width), height)
         count = 0
         user_list = [0 for i in range(self.parent.user_num)]
+        self.l = [0 for i in range(4)]
         print(self.parent.working)
         while self.parent.working:
             img, frame = cam.read()
@@ -85,6 +86,9 @@ class Thread(QThread):
                 print(a[0])
                 print(user_list)
                 print(user_list.index(a[0]))
+                for i in range(4):
+                    self.l[i] = user_list.index(a[i])
+                print(self.l)
                 self.parent.close_cam()
                 self.quit()
                 self.working = True
@@ -149,20 +153,19 @@ class Login(QWidget):
     def close_cam(self):
         self.working = False
 
-    def success_login(self):
-        self.close_cam()
-        th = threading.Thread(target=self.start_check)
-        th.start()
-
     def start_check(self):
         if(self.worker.working):
-            self.check =Check()
+            sql = "select * from userdata where memberID =" + str(self.worker.l[0]+1)
+            self.curs.execute(sql)
+            self.check =Check(self.curs.fetchone())
 
 class Check(QWidget):
-    def __init__(self):
+    def __init__(self, predict_list):
         QWidget.__init__(self)
         self.ui = uic.loadUi("./UI/check.ui")
+        self.ui.label.setText(predict_list[1] + "님이 맞으신가요?")
         self.ui.show()
+        print(predict_list)
         self.ui.btn_yes.clicked.connect(self.answer_yes)
         print("check init")
 
