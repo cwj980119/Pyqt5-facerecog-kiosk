@@ -35,6 +35,26 @@ def createFolder(directory):
     except OSError:
         print('Error: Creating directory. ' + directory)
 
+def findnumber(db_name,db_phonenumber):
+    sql2="SELECT memberID, name FROM memberdata where name ="+"'"+db_name+"'" "AND phonenumber ="+"'"+ db_phonenumber+"'"   
+    conn2 = connectDB()
+    curs2 = conn2.cursor()
+    print(db_name)
+    curs2.execute(sql2)  
+    
+    result=curs2.fetchone()
+    print(result)
+    print(int(result[0]))
+    #print(str(result[1]))
+        
+    ## 이미지저장경로 설정, 컴퓨터에 맞게 변경필요
+    #route='/Users/admin/Documents/GitHub/Pyqt5-facerecog-kiosk/image/'
+    #routenumber=str(result[0])
+    #createFolder(route+str(result[1])+str(result[0]))
+        
+    curs2.close()
+    disconnectDB(conn2)
+
     
 class Ui_register(object):
     def setupUi(self, MainWindow):
@@ -165,23 +185,28 @@ class Ui_register(object):
             self.lineEdit_4.setText("")
             self.lineEdit_5.setText("")
             self.lineEdit_6.setText("")
-          
-        curs.close()
-        disconnectDB(conn)
-           
-        conn = connectDB()
-        curs = conn.cursor()
-        sql2="SELECT memberID, name FROM memberdata WHERE name = '김성찬'"
+        
+   
+        sql2="SELECT memberID, name FROM memberdata where name ="+"'"+db_name+"'" "AND phonenumber ="+"'"+ db_phonenumber+"'"   
+        
         print(db_name)
-        curs.execute(sql2)
+        curs.execute(sql2)  
+    
         result=curs.fetchone()
         
         ## 이미지저장경로 설정, 컴퓨터에 맞게 변경필요
         route='/Users/admin/Documents/GitHub/Pyqt5-facerecog-kiosk/image/'
-        routenumber=str(result[0])
-        createFolder(route+str(result[1])+str(result[0]))
+        db_photoaddress=route+str(result[1])+str(result[0])
+        createFolder(db_photoaddress)
+        
+        ##경로 photoaddress에 입력
+        sql2="UPDATE memberdata SET photoaddress = %s WHERE memberID = %s"
+        val2=(db_photoaddress,result[0])
+        curs.execute(sql2,val2)
+        conn.commit()
         curs.close()
-        disconnectDB(conn)
+        conn.close()
+        
         
     def close_window(self):
         self.window.close()

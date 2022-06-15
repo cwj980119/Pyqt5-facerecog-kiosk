@@ -98,7 +98,7 @@ class Login(QWidget):
                         print(user_list)
                         print(user_list.index(a[0]))
                     #print(a)
-
+                    
 
             cvt_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             h, w, c = cvt_frame.shape
@@ -118,8 +118,8 @@ class Login(QWidget):
 
     def success_login(self):
         self.close_cam()
-
-
+ 
+     
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
