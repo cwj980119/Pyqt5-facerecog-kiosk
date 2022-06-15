@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import *
 from PyQt5 import uic,QtWidgets, QtGui
 from keras.models import load_model
 import pymysql
+import register
 
 def connectDB():
     host="database-1.cb5pctivsgrb.us-east-1.rds.amazonaws.com"
@@ -25,12 +26,20 @@ class Main(QWidget):
         self.ui = uic.loadUi("./UI/main.ui")
         self.ui.show()
         self.ui.btn_login.clicked.connect(self.toLogin)
-        self.ui.btn_register.clicked.connect(self.a)
+        self.ui.btn_register.clicked.connect(self.toRegister)
+        
 
 
     def toLogin(self):
         self.ui.hide()
         self.login = Login(self)
+    
+    def toRegister(self):
+        self.ui.hide()
+        self.signin_window = QtWidgets.QMainWindow()
+        self.register= register.Ui_register()
+        self.register.setupUi(self.signin_window)
+        self.signin_window.show()
 
     def toMain(self):
         self.ui.show()
