@@ -35,7 +35,7 @@ class Thread(QThread):
         height = cam.get(cv2.CAP_PROP_FRAME_HEIGHT)
         print(round(width), height)
         count = 0
-        user_list = [0 for i in range(self.parent.user_num)]
+        user_list = np.empty(shape=self.parent.user_num)
         self.l = [0 for i in range(4)]
         print(self.parent.working)
         while self.parent.working:
@@ -56,10 +56,12 @@ class Thread(QThread):
                 image = np.expand_dims(image, 0)
                 # print(image.shape)
                 a = load_model.predict(image)
+                print(type(a[0]))
                 # print(a[0][np.argmax(a)])
                 if a[0][np.argmax(a)] > 0.9:
                     count += 1
-                    user_list[np.argmax(a)] += 1
+                    user_list += a[0]
+                    print(user_list)
                     # print(np.argmax(a),"th user")
                     # if count>20:
                     #     print(user_list)
@@ -80,15 +82,9 @@ class Thread(QThread):
             self.parent.ui.cam.resize(round(width), round(height))
             self.parent.ui.cam.setPixmap(pixmap)
             if count > 20:
-                print(user_list)
-                a = user_list.copy()
-                a.sort(reverse=True)
-                print(a[0])
-                print(user_list)
-                print(user_list.index(a[0]))
+                a = np.sort(user_list)[::-1]
                 for i in range(4):
-                    self.l[i] = user_list.index(a[i])
-                print(self.l)
+                    self.l[i] = np.where(user_list==a[i])[0][0]
                 self.parent.close_cam()
                 self.quit()
                 self.working = True
@@ -155,22 +151,37 @@ class Login(QWidget):
 
     def start_check(self):
         if(self.worker.working):
+            self.predict_list = []
             sql = "select * from userdata where memberID =" + str(self.worker.l[0]+1)
             self.curs.execute(sql)
-            self.check =Check(self.curs.fetchone())
+            self.predict_list.append(self.curs.fetchone())
+            sql = "select * from userdata where memberID in ("+str(self.worker.l[1]+1)+"," + str(self.worker.l[2]+1)+"," + str(self.worker.l[3]+1)+")"
+            self.curs.execute(sql)
+            self.predict_list.append(self.curs.fetchall())
+            print(self.predict_list)
+            self.check =Check(self.predict_list)
 
 class Check(QWidget):
     def __init__(self, predict_list):
         QWidget.__init__(self)
         self.ui = uic.loadUi("./UI/check.ui")
-        self.ui.label.setText(predict_list[1] + "님이 맞으신가요?")
+        self.set_Text(predict_list)
+        self.ui.label.setText(predict_list[0][1] + "님이 맞으신가요?")
         self.ui.show()
         print(predict_list)
         self.ui.btn_yes.clicked.connect(self.answer_yes)
-        print("check init")
 
     def answer_yes(self):
         print("yes")
+
+    def set_Text(self,p_list):
+        self.ui.label.setText(p_list[0][1] + "님이 맞으신가요?")
+        self.ui.list1_name.setText(p_list[1][0][1])
+        self.ui.list1_num.setText(p_list[1][0][5])
+        self.ui.list2_name.setText(p_list[1][1][1])
+        self.ui.list2_num.setText(p_list[1][1][5])
+        self.ui.list3_name.setText(p_list[1][2][1])
+        self.ui.list3_num.setText(p_list[1][2][5])
 
 
 if __name__ == '__main__':
