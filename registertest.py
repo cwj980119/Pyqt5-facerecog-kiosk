@@ -13,7 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 from webcam import Ui_Webcam
 import pymysql
-
+import os
 
 def connectDB():
     host="database-1.cb5pctivsgrb.us-east-1.rds.amazonaws.com"
@@ -27,6 +27,14 @@ def connectDB():
 
 def disconnectDB(conn):
     conn.close()
+    
+def createFolder(directory):
+    try:
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+    except OSError:
+        print('Error: Creating directory. ' + directory)
+
     
 class Ui_register(object):
     def setupUi(self, MainWindow):
@@ -133,8 +141,6 @@ class Ui_register(object):
         db_phonenumber=self.lineEdit_6.text()
         
         sql="INSERT INTO memberdata ( name, password, birthdate, gender, phonenumber) VALUES ( %s, %s, %s, '%s', %s)"
-        print("100")
-        
        
         if password1==password2:    
             if gender=="여":
@@ -149,9 +155,6 @@ class Ui_register(object):
             val=( db_name, db_password, db_birthdate, db_gender, db_phonenumber)
             
             curs.execute(sql,val)
-            print("3")
-            result = curs.fetchone()
-            print(val)
             conn.commit()
             
            
@@ -162,7 +165,21 @@ class Ui_register(object):
             self.lineEdit_4.setText("")
             self.lineEdit_5.setText("")
             self.lineEdit_6.setText("")
+          
+        curs.close()
+        disconnectDB(conn)
+           
+        conn = connectDB()
+        curs = conn.cursor()
+        sql2="SELECT memberID, name FROM memberdata WHERE name = '김성찬'"
+        print(db_name)
+        curs.execute(sql2)
+        result=curs.fetchone()
         
+        ## 이미지저장경로 설정, 컴퓨터에 맞게 변경필요
+        route='/Users/admin/Documents/GitHub/Pyqt5-facerecog-kiosk/image/'
+        routenumber=str(result[0])
+        createFolder(route+str(result[1])+str(result[0]))
         curs.close()
         disconnectDB(conn)
         
