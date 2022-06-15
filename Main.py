@@ -97,7 +97,6 @@ class Main(QWidget):
         self.ui.show()
         self.ui.btn_login.clicked.connect(self.toLogin)
         self.ui.btn_register.clicked.connect(self.toRegister)
-        
 
 
     def toLogin(self):
@@ -113,8 +112,10 @@ class Main(QWidget):
 
     def toMain(self):
         self.ui.show()
-    def a(self):
-        self.b = Check()
+
+    def toMenu(self, user):
+        self.ui.hide()
+        self.menu = Menu(user)
 
 class Login(QWidget):
     def __init__(self, main):
@@ -159,20 +160,40 @@ class Login(QWidget):
             self.curs.execute(sql)
             self.predict_list.append(self.curs.fetchall())
             print(self.predict_list)
-            self.check =Check(self.predict_list)
+            self.check =Check(self.predict_list, self)
+
+    def succ(self, user):
+        self.close()
+        self.main.toMenu(user)
+
 
 class Check(QWidget):
-    def __init__(self, predict_list):
+    def __init__(self, predict_list, login_page):
         QWidget.__init__(self)
         self.ui = uic.loadUi("./UI/check.ui")
+        self.login_page = login_page
         self.set_Text(predict_list)
+        self.predict = predict_list
         self.ui.label.setText(predict_list[0][1] + "님이 맞으신가요?")
         self.ui.show()
         print(predict_list)
         self.ui.btn_yes.clicked.connect(self.answer_yes)
+        self.ui.list1_ok.clicked.connect(self.answer_1)
+        self.ui.list2_ok.clicked.connect(self.answer_2)
+        self.ui.list3_ok.clicked.connect(self.answer_3)
 
     def answer_yes(self):
-        print("yes")
+        self.login_success(self.predict[0])
+    def answer_1(self):
+        self.login_success(self.predict[1][0])
+    def answer_2(self):
+        self.login_success(self.predict[1][1])
+    def answer_3(self):
+        self.login_success(self.predict[1][2])
+
+    def login_success(self, user):
+        self.ui.hide()
+        self.login_page.succ(user)
 
     def set_Text(self,p_list):
         self.ui.label.setText(p_list[0][1] + "님이 맞으신가요?")
@@ -182,6 +203,13 @@ class Check(QWidget):
         self.ui.list2_num.setText(p_list[1][1][5])
         self.ui.list3_name.setText(p_list[1][2][1])
         self.ui.list3_num.setText(p_list[1][2][5])
+
+class Menu(QWidget):
+    def __init__(self, user):
+        QWidget.__init__(self)
+        self.ui = uic.loadUi("./UI/menu.ui")
+        self.ui.label.setText("어서오세요 " + user[1] + "님!")
+        self.ui.show()
 
 
 if __name__ == '__main__':
