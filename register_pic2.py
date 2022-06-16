@@ -47,6 +47,8 @@ class Cam(QThread):
         while self.parent.working:
             img, frame = cam.read()
             face = detector(frame)
+            path_train = './dataset/train/'
+            path_test = './dataset/test/'
             for f in face:
                 # dlib으로 얼굴 검출
                 cv2.rectangle(frame, (f.left() - 21, f.top() - 21), (f.right() + 21, f.bottom() + 21), (0, 0, 255), 1)

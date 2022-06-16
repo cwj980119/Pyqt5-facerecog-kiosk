@@ -3,6 +3,7 @@ from PyQt5 import uic,QtWidgets, QtGui
 import pymysql
 import os
 import register_pic2
+import register_pic
 '''
 # 상황에 맞게 table변경필요    
 def connectDB():
@@ -74,20 +75,19 @@ class Register(QWidget):
         
         #사진연동
         
-        if password1==password2:    
+        if password1==password2:
             if gender=="여":
                 db_gender=False
             elif gender=="남":
                 db_gender=True
-                   
+
             db_password=password1
             #conn = connectDB()
             #curs = conn.cursor()
             
             #val=( db_name, db_password, db_birthdate, db_gender, db_phonenumber)
             self.ui.hide()
-            
-            self.regpic = register_pic2.Take_pic(self, db_name, db_password, db_birthdate, db_gender, db_phonenumber)
+            self.regpic = register_pic.Take_pic(self.main, db_name, db_password, db_birthdate, db_gender, db_phonenumber)
         
             #sql="INSERT INTO memberdata ( name, password, birthdate, gender, phonenumber) VALUES ( %s, %s, %s, '%s', %s)"
             
