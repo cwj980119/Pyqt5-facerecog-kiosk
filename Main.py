@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import *
 from PyQt5 import uic,QtWidgets, QtGui
 
 import login
-import register2
+import register
 import menu
 import register_pic
 
@@ -22,12 +22,12 @@ class Main(QWidget):
     
     def toRegister(self):
         self.ui.hide()
-        self.register=register2.Register(self)
+        self.register=register.Register(self)
         # self.signin_window = QtWidgets.QMainWindow()
         # self.register= register.Ui_register()
         # self.register.setupUi(self.signin_window)
         # self.signin_window.show()
-        #sself.regpic = register_pic.Take_pic(self)
+        # self.regpic = register_pic.Take_pic(self)
 
     def toMain(self):
         self.ui.show()
