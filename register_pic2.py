@@ -187,7 +187,7 @@ class Take_pic(QWidget):
         result=curs.fetchone()
         
         ## 이미지저장경로 설정, 컴퓨터에 맞게 변경필요
-        route='/Users/admin/Documents/GitHub/Pyqt5-facerecog-kiosk/image/'
+        route='./image/'
         db_photoaddress=route+str(self.db_name)+str(result[0]+1)
         
         #route1=db_photoaddress+'/train'
