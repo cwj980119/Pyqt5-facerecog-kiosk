@@ -5,7 +5,7 @@ from PyQt5 import uic,QtWidgets, QtGui
 import login
 import register
 import menu
-import register_pic
+import register_pic2
 
 class Main(QWidget):
     def __init__(self):

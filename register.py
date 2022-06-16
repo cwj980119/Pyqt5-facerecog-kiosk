@@ -2,8 +2,8 @@ from PyQt5.QtWidgets import *
 from PyQt5 import uic,QtWidgets, QtGui
 import pymysql
 import os
-import register_pic
- 
+import register_pic2
+'''
 # 상황에 맞게 table변경필요    
 def connectDB():
     host="database-1.cb5pctivsgrb.us-east-1.rds.amazonaws.com"
@@ -44,7 +44,7 @@ def findnumber(db_name,db_phonenumber):
         
     curs2.close()
     disconnectDB(conn2)
-
+'''
 class Register(QWidget):
     def __init__(self, main):
         QWidget.__init__(self)
@@ -63,10 +63,6 @@ class Register(QWidget):
     
     def take_pic(self):
         
-        #사진연동
-        
-        self.ui.hide()
-        self.regpic = register_pic.Take_pic(self)
         #DB연결
         
         db_name=self.ui.lineEdit_1.text()
@@ -76,8 +72,8 @@ class Register(QWidget):
         gender=self.ui.lineEdit_5.text()
         db_phonenumber=self.ui.lineEdit_6.text()
         
-        sql="INSERT INTO memberdata ( name, password, birthdate, gender, phonenumber) VALUES ( %s, %s, %s, '%s', %s)"
-       
+        #사진연동
+        
         if password1==password2:    
             if gender=="여":
                 db_gender=False
@@ -85,13 +81,18 @@ class Register(QWidget):
                 db_gender=True
                    
             db_password=password1
-            conn = connectDB()
-            curs = conn.cursor()
+            #conn = connectDB()
+            #curs = conn.cursor()
             
-            val=( db_name, db_password, db_birthdate, db_gender, db_phonenumber)
+            #val=( db_name, db_password, db_birthdate, db_gender, db_phonenumber)
+            self.ui.hide()
             
-            curs.execute(sql,val)
-            conn.commit()
+            self.regpic = register_pic2.Take_pic(self, db_name, db_password, db_birthdate, db_gender, db_phonenumber)
+        
+            #sql="INSERT INTO memberdata ( name, password, birthdate, gender, phonenumber) VALUES ( %s, %s, %s, '%s', %s)"
+            
+            #curs.execute(sql,val)
+            #conn.commit()
             
            
         else:
@@ -103,25 +104,23 @@ class Register(QWidget):
             self.ui.lineEdit_6.setText("")
         
    
-        sql2="SELECT memberID, name FROM memberdata where name ="+"'"+db_name+"'" "AND phonenumber ="+"'"+ db_phonenumber+"'"   
+        #sql2="SELECT memberID, name FROM memberdata where name ="+"'"+db_name+"'" "AND phonenumber ="+"'"+ db_phonenumber+"'"   
         
-        print(db_name)
-        curs.execute(sql2)  
-    
-        result=curs.fetchone()
+        #curs.execute(sql2)  
+        #result=curs.fetchone()
         
         ## 이미지저장경로 설정, 컴퓨터에 맞게 변경필요
-        route='/Users/admin/Documents/GitHub/Pyqt5-facerecog-kiosk/image/'
-        db_photoaddress=route+str(result[1])+str(result[0])
-        createFolder(db_photoaddress)
+        #route='/Users/admin/Documents/GitHub/Pyqt5-facerecog-kiosk/image/'
+        #db_photoaddress=route+str(result[1])+str(result[0])
+        #createFolder(db_photoaddress)
         
         ##경로 photoaddress에 입력
-        sql2="UPDATE memberdata SET photoaddress = %s WHERE memberID = %s"
-        val2=(db_photoaddress,result[0])
-        curs.execute(sql2,val2)
-        conn.commit()
-        curs.close()
-        conn.close()
+        #sql2="UPDATE memberdata SET photoaddress = %s WHERE memberID = %s"
+        #val2=(db_photoaddress,result[0])
+        #curs.execute(sql2,val2)
+        #conn.commit()
+        #curs.close()
+        #conn.close()
         
     def close_window(self):
         self.ui.close()
