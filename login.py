@@ -87,6 +87,7 @@ class Thread(QThread):
                 self.parent.close_cam()
                 self.quit()
                 self.working = True
+        self.working =False
 
 
 class Login(QWidget):

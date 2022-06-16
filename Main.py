@@ -31,7 +31,7 @@ class Main(QWidget):
 
     def toMenu(self, user):
         self.ui.hide()
-        self.menu = menu.Menu(user)
+        self.menu = menu.Menu(self, user)
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
