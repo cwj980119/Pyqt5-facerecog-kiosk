@@ -10,6 +10,11 @@
     <height>901</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>9</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
@@ -77,6 +82,11 @@
       <height>70</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_3">
     <property name="geometry">
@@ -86,6 +96,11 @@
       <width>460</width>
       <height>70</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+     </font>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_4">
@@ -97,6 +112,11 @@
       <height>70</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_5">
     <property name="geometry">
@@ -106,6 +126,11 @@
       <width>460</width>
       <height>70</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+     </font>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
@@ -186,6 +211,14 @@ p, li { white-space: pre-wrap; }
       <height>70</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
    </widget>
    <widget class="QLabel" name="label_1">
     <property name="geometry">
@@ -209,6 +242,11 @@ p, li { white-space: pre-wrap; }
       <height>70</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
    </widget>
    <widget class="QLabel" name="label_5">
     <property name="geometry">
@@ -223,6 +261,7 @@ p, li { white-space: pre-wrap; }
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt; color:#b5b5b5;&quot;&gt;성별을 입력해주세요(ex 남/여)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
+   <zorder>lineEdit_1</zorder>
    <zorder>lineEdit_6</zorder>
    <zorder>pushbutton</zorder>
    <zorder>pushButton_2</zorder>
@@ -236,7 +275,6 @@ p, li { white-space: pre-wrap; }
    <zorder>label_4</zorder>
    <zorder>label_6</zorder>
    <zorder>textBrowser</zorder>
-   <zorder>lineEdit_1</zorder>
    <zorder>label_1</zorder>
    <zorder>label_5</zorder>
   </widget>
