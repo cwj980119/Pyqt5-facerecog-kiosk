@@ -9,11 +9,12 @@
 
 
 import sys
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import uic,QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 from webcam import Ui_Webcam
 import pymysql
 import os
+
 
 def connectDB():
     host="database-1.cb5pctivsgrb.us-east-1.rds.amazonaws.com"
@@ -78,6 +79,8 @@ class Ui_register(object):
         self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_3.setGeometry(QtCore.QRect(0, 540, 121, 71))
         self.pushButton_3.setObjectName("pushButton_3")
+        self.pushButton_3.clicked.connect(self.gotoMain)
+        
         self.lineEdit_1 = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit_1.setGeometry(QtCore.QRect(110, 110, 431, 61))
         self.lineEdit_1.setObjectName("lineEdit_1")
@@ -157,11 +160,12 @@ class Ui_register(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         
     def take_pic(self):
+        
         self.picture_window = QtWidgets.QMainWindow()
         self.picture= Ui_Webcam()
         self.picture.setupUi(self.picture_window)
         self.picture_window.show()
-        
+        MainWindow.hide()
         #DB연결
         
         db_name=self.lineEdit_1.text()
@@ -221,6 +225,9 @@ class Ui_register(object):
         
     def close_window(self):
         self.window.close()
+    
+    def gotoMain(self):
+        self.window.hide()
         
     def lineEdit_1changed(self):
         if self.lineEdit_1:
