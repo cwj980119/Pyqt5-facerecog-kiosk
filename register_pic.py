@@ -16,7 +16,7 @@ class Cam(QThread):
         width = cam.get(cv2.CAP_PROP_FRAME_WIDTH)
         height = cam.get(cv2.CAP_PROP_FRAME_HEIGHT)
         detector = dlib.get_frontal_face_detector()
-        while True:
+        while self.parent.working:
             img, frame = cam.read()
             face = detector(frame)
             for f in face:
@@ -67,6 +67,9 @@ class Take_pic(QWidget):
         #self.worker.finished.connect(self.start_check)
         self.worker.start()
 
+    def close_cam(self):
+        self.working = False
+
     def start_count(self):
         self.timer.start()
         self.ask =True
@@ -82,10 +85,35 @@ class Take_pic(QWidget):
             elif(self.flow==2):
                 self.ui.name.setText("이제 오른쪽을 봐 주세요")
                 self.ask = False
+            elif (self.flow == 3):
+                self.ui.name.setText("위쪽을 봐 주세요")
+                self.ask = False
+            elif (self.flow == 4):
+                self.ui.name.setText("아래쪽을 봐 주세요")
+                self.ask = False
+            elif (self.flow == 5):
+                self.ui.name.setText("웃어주세요")
+                self.ask = False
+            elif (self.flow == 6):
+                self.ui.name.setText("아~")
+                self.ask = False
+            elif (self.flow == 7):
+                self.ui.name.setText("에~")
+                self.ask = False
+            elif (self.flow == 8):
+                self.ui.name.setText("이~")
+                self.ask = False
+            elif (self.flow == 9):
+                self.ui.name.setText("오~")
+                self.ask = False
+            elif (self.flow == 10):
+                self.ui.name.setText("우~")
+                self.ask = False
             else:
                 self.ui.name.setText("촬영이 종료되었습니다.")
                 self.ask = False
                 self.timer.stop()
+                self.close_cam()
         else:
             if(self.cnt == 0):
                 self.ui.name.setText("3")
@@ -95,6 +123,10 @@ class Take_pic(QWidget):
                 self.cnt += 1
             elif(self.cnt == 2):
                 self.ui.name.setText("1")
+                self.cnt += 1
+            elif(self.cnt == 3):
+                self.cnt+=1
+            elif(self.cnt == 4):
                 self.cnt = 0
                 self.flow += 1
                 self.ask = True
