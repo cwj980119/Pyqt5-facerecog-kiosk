@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>629</width>
-    <height>652</height>
+    <width>1258</width>
+    <height>901</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,11 +17,16 @@
    <widget class="QToolButton" name="pushbutton">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>470</y>
-      <width>151</width>
-      <height>91</height>
+      <x>450</x>
+      <y>550</y>
+      <width>341</width>
+      <height>191</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>30</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>사진촬영</string>
@@ -30,11 +35,16 @@
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>510</x>
-      <y>540</y>
-      <width>121</width>
-      <height>71</height>
+      <x>1020</x>
+      <y>740</y>
+      <width>241</width>
+      <height>121</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>30</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>이전</string>
@@ -44,10 +54,15 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>540</y>
-      <width>121</width>
-      <height>71</height>
+      <y>740</y>
+      <width>221</width>
+      <height>121</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>30</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>처음으로</string>
@@ -56,102 +71,102 @@
    <widget class="QLineEdit" name="lineEdit_2">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>170</y>
-      <width>431</width>
-      <height>61</height>
+      <x>400</x>
+      <y>160</y>
+      <width>460</width>
+      <height>70</height>
      </rect>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_3">
     <property name="geometry">
      <rect>
-      <x>110</x>
+      <x>400</x>
       <y>230</y>
-      <width>431</width>
-      <height>61</height>
+      <width>460</width>
+      <height>70</height>
      </rect>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_4">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>290</y>
-      <width>431</width>
-      <height>61</height>
+      <x>400</x>
+      <y>300</y>
+      <width>460</width>
+      <height>70</height>
      </rect>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_5">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>350</y>
-      <width>431</width>
-      <height>61</height>
+      <x>400</x>
+      <y>370</y>
+      <width>460</width>
+      <height>70</height>
      </rect>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>170</y>
+      <x>440</x>
+      <y>160</y>
       <width>381</width>
       <height>71</height>
      </rect>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; color:#b5b5b5;&quot;&gt;비밀번호를 입력해주세요&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt; color:#b5b5b5;&quot;&gt;비밀번호를 입력해주세요&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>120</x>
+      <x>440</x>
       <y>230</y>
       <width>381</width>
       <height>71</height>
      </rect>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; color:#b5b5b5;&quot;&gt;비밀번호를 다시 입력해주세요&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt; color:#b5b5b5;&quot;&gt;비밀번호를 다시 입력해주세요&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>290</y>
+      <x>470</x>
+      <y>300</y>
       <width>341</width>
       <height>71</height>
      </rect>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; color:#b5b5b5;&quot;&gt;생년월일을 입력해주세요&lt;/span&gt;&lt;span style=&quot; font-size:12pt; color:#b5b5b5;&quot;&gt;(ex:19990909)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt; color:#b5b5b5;&quot;&gt;생년월일을 입력해주세요&lt;/span&gt;&lt;span style=&quot; font-size:12pt; color:#b5b5b5;&quot;&gt;(ex:19990909)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>410</y>
+      <x>430</x>
+      <y>440</y>
       <width>381</width>
       <height>71</height>
      </rect>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; color:#b5b5b5;&quot;&gt;휴대폰번호를 입력해주세요&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt; color:#b5b5b5;&quot;&gt;휴대폰번호를 입력해주세요&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QTextBrowser" name="textBrowser">
     <property name="geometry">
      <rect>
-      <x>180</x>
+      <x>475</x>
       <y>0</y>
-      <width>256</width>
-      <height>51</height>
+      <width>321</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="html">
@@ -165,47 +180,47 @@ p, li { white-space: pre-wrap; }
    <widget class="QLineEdit" name="lineEdit_1">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>110</y>
-      <width>431</width>
-      <height>61</height>
+      <x>400</x>
+      <y>90</y>
+      <width>460</width>
+      <height>70</height>
      </rect>
     </property>
    </widget>
    <widget class="QLabel" name="label_1">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>110</y>
+      <x>510</x>
+      <y>90</y>
       <width>221</width>
       <height>71</height>
      </rect>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; color:#b5b5b5;&quot;&gt;이름을 입력해주세요&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt; color:#b5b5b5;&quot;&gt;이름을 입력해주세요&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_6">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>410</y>
-      <width>431</width>
-      <height>61</height>
+      <x>400</x>
+      <y>440</y>
+      <width>460</width>
+      <height>70</height>
      </rect>
     </property>
    </widget>
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>350</y>
+      <x>440</x>
+      <y>370</y>
       <width>381</width>
       <height>71</height>
      </rect>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; color:#b5b5b5;&quot;&gt;성별을 입력해주세요(ex 남/여)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt; color:#b5b5b5;&quot;&gt;성별을 입력해주세요(ex 남/여)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <zorder>lineEdit_6</zorder>
@@ -230,7 +245,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>629</width>
+     <width>1258</width>
      <height>21</height>
     </rect>
    </property>
