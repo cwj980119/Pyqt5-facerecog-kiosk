@@ -1,4 +1,4 @@
-import dlib,cv2,threading
+import dlib,cv2
 import numpy as np
 from PyQt5.QtWidgets import *
 from PyQt5 import uic,QtWidgets, QtGui
@@ -24,7 +24,6 @@ class Thread(QThread):
     def __init__(self, p=None):
         QThread.__init__(self,parent=p)
         self.parent = p
-        print(self.parent)
 
     def run(self):
         self.working = False
@@ -87,6 +86,7 @@ class Thread(QThread):
                 self.parent.close_cam()
                 self.quit()
                 self.working = True
+                return
         self.working =False
 
 
