@@ -5,6 +5,7 @@ from PyQt5 import uic,QtGui
 from PyQt5.QtCore import QThread,QTimer
 import pymysql
 import random
+import learning
 import os
 
 
@@ -90,6 +91,8 @@ class Take_pic(QWidget):
     def regi_succ(self):
         self.close_cam()
         self.worker.quit()
+        self.learning = learning.Learnig(self.main)
+        self.ui.hide()
 
     def close_cam(self):
         self.working = False
@@ -114,7 +117,7 @@ class Take_pic(QWidget):
             self.conn.commit()
             for i in self.worker.file_list:
                 cv2.imwrite(i[0], i[1])
-            self.close()
+            self.regi_succ()
         except:
             print("실패")
 

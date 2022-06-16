@@ -2,6 +2,7 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5 import uic,QtWidgets, QtGui
 
+import learning
 import login
 import register
 import menu
@@ -14,6 +15,7 @@ class Main(QWidget):
         self.ui.show()
         self.ui.btn_login.clicked.connect(self.toLogin)
         self.ui.btn_register.clicked.connect(self.toRegister)
+        self.ui.a.clicked.connect(self.tolearning)
         
 
     def toLogin(self):
@@ -31,6 +33,10 @@ class Main(QWidget):
 
     def toMain(self):
         self.ui.show()
+
+    def tolearning(self):
+        self.ui.hide()
+        self.learning = learning.Learnig(self)
         
     def toMenu(self, user):
         self.ui.hide()
