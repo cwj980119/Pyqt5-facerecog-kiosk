@@ -17,7 +17,8 @@ def connectDB():
     conn=pymysql.connect(host=host,user=username,password=password,db=database,port=port)
     return(conn)
 
-load_model = load_model('tl_20_cropped_e20_b200.h5')
+#load_model = load_model('tl_20_cropped_e20_b200.h5')
+load_model = load_model('face_model.h5')
 
 
 class Thread(QThread):
@@ -54,12 +55,11 @@ class Thread(QThread):
                 image = np.expand_dims(image, 0)
                 # print(image.shape)
                 a = load_model.predict(image)
-                print(type(a[0]))
                 # print(a[0][np.argmax(a)])
-                if a[0][np.argmax(a)] > 0.9:
+                if count < 100:
                     count += 1
                     user_list += a[0]
-                    print(user_list)
+                    print(count)
                     # print(np.argmax(a),"th user")
                     # if count>20:
                     #     print(user_list)
@@ -71,15 +71,14 @@ class Thread(QThread):
                     #     print(user_list)
                     #     print(user_list.index(a[0]))
                     # #print(a)
-
-            print("done")
+            frame = cv2.flip(frame, 1)
             cvt_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             h, w, c = cvt_frame.shape
             qImg = QtGui.QImage(cvt_frame.data, w, h, w * c, QtGui.QImage.Format_RGB888)
             pixmap = QtGui.QPixmap.fromImage(qImg)
             self.parent.ui.cam.resize(round(width), round(height))
             self.parent.ui.cam.setPixmap(pixmap)
-            if count > 20:
+            if count > 50:
                 a = np.sort(user_list)[::-1]
                 for i in range(4):
                     self.l[i] = np.where(user_list==a[i])[0][0]
@@ -97,14 +96,13 @@ class Login(QWidget):
         try:
             conn = connectDB()
             self.curs = conn.cursor()
-            self.curs.execute("select count(*) from userdata")
+            self.curs.execute("select count(*) from sho")
             result = self.curs.fetchone()
             self.user_num = result[0]
             print(self.user_num)
             self.ui = uic.loadUi("./UI/login.ui")
             self.ui.to_main.clicked.connect(self.close)
             self.ui.cam_on.clicked.connect(self.start_cam)
-            self.ui.cam_off.clicked.connect(self.close_cam)
             self.ui.show()
         except:
             print("db연결 실패")
@@ -114,6 +112,9 @@ class Login(QWidget):
         self.close_cam()
         self.main.toMain()
         self.ui.hide()
+
+    def show_self(self):
+        self.ui.show()
 
     def start_cam(self):
         self.working = True
@@ -127,10 +128,11 @@ class Login(QWidget):
     def start_check(self):
         if(self.worker.working):
             self.predict_list = []
-            sql = "select * from userdata where memberID =" + str(self.worker.l[0]+1)
+            print(self.worker.l)
+            sql = "select * from sho where memberID =" + str(self.worker.l[0]+1)
             self.curs.execute(sql)
             self.predict_list.append(self.curs.fetchone())
-            sql = "select * from userdata where memberID in ("+str(self.worker.l[1]+1)+"," + str(self.worker.l[2]+1)+"," + str(self.worker.l[3]+1)+")"
+            sql = "select * from sho where memberID in ("+str(self.worker.l[1]+1)+"," + str(self.worker.l[2]+1)+"," + str(self.worker.l[3]+1)+")"
             self.curs.execute(sql)
             self.predict_list.append(self.curs.fetchall())
             print(self.predict_list)

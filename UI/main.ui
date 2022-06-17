@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>얼굴인식 키오스크</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="btn_login">
@@ -46,20 +46,7 @@
      <string>회원가입</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="a">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>60</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>testbtn</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btn_register_2">
+   <widget class="QPushButton" name="btn_menu">
     <property name="geometry">
      <rect>
       <x>450</x>

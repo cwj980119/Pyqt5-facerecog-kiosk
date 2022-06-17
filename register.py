@@ -52,7 +52,7 @@ class Register(QWidget):
         self.main = main
         self.ui = uic.loadUi("./UI/register.ui")
         self.ui.pushbutton.clicked.connect(self.take_pic)
-        self.ui.pushButton_2.clicked.connect(self.close_window)
+        self.ui.pushButton_2.clicked.connect(self.gotoMain)
         self.ui.pushButton_3.clicked.connect(self.gotoMain)
         self.ui.lineEdit_1.textChanged.connect(self.lineEdit_1changed)
         self.ui.lineEdit_2.textChanged.connect(self.lineEdit_2changed)

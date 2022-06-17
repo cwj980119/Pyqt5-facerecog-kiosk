@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>얼굴인식 로그인</string>
   </property>
   <widget class="QLabel" name="cam">
    <property name="geometry">
@@ -32,30 +32,14 @@
      <x>200</x>
      <y>700</y>
      <width>500</width>
-     <height>100</height>
+     <height>300</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font: 30pt &quot;HY궁서B&quot;;</string>
+    <string notr="true">font: 30pt &quot;HY엽서L&quot;;</string>
    </property>
    <property name="text">
-    <string>Camera On</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="cam_off">
-   <property name="geometry">
-    <rect>
-     <x>200</x>
-     <y>900</y>
-     <width>500</width>
-     <height>100</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">font: 30pt &quot;HY궁서B&quot;;</string>
-   </property>
-   <property name="text">
-    <string>Camera Off</string>
+    <string>얼굴인식 시작</string>
    </property>
   </widget>
   <widget class="QPushButton" name="to_main">
@@ -68,7 +52,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>back</string>
+    <string>돌아가기</string>
    </property>
   </widget>
  </widget>

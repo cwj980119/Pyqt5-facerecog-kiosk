@@ -16,7 +16,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>회원가입</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QToolButton" name="pushbutton">
@@ -284,7 +284,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1258</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

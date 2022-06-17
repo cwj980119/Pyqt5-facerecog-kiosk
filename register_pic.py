@@ -54,6 +54,7 @@ class Cam(QThread):
                     self.file_list.append([file_name_path,crop])
                     self.count += 1
                     self.pic = False
+            frame = cv2.flip(frame, 1)
             cvt_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             h, w, c = cvt_frame.shape
             qImg = QtGui.QImage(cvt_frame.data, w, h, w * c, QtGui.QImage.Format_RGB888)
@@ -106,7 +107,7 @@ class Take_pic(QWidget):
         try:
             self.conn = self.connectDB()
             self.curs = self.conn.cursor()
-            sql1 = "Select max(memberID) from memberdata"
+            sql1 = "Select max(memberID) from sho"
             self.curs.execute(sql1)
             result = self.curs.fetchone()
             self.user_num = result[0] + 1
@@ -114,7 +115,7 @@ class Take_pic(QWidget):
             print("DB 연결 실패")
 
     def db_commit(self):
-        sql = "INSERT INTO memberdata ( name, password, birthdate, gender, phonenumber) VALUES ( %s, %s, %s, '%s', %s)"
+        sql = "INSERT INTO sho ( name, password, birthdate, gender, phonenumber) VALUES ( %s, %s, %s, '%s', %s)"
         var = (self.db_name, self.db_password, self.db_birthdate, self.db_gender, self.db_phonenumber)
         try:
             self.curs.execute(sql,var)
