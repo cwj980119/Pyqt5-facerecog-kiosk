@@ -91,7 +91,8 @@ class Take_pic(QWidget):
     def regi_succ(self):
         self.close_cam()
         self.worker.quit()
-        self.learning = learning.Learnig(self.main)
+        user = [999, self.db_name, self.db_name, self.db_password, self.db_birthdate, self.db_gender, self.db_phonenumber]
+        self.learning = learning.Learnig(self.main, user)
         self.ui.hide()
 
     def close_cam(self):
@@ -102,12 +103,15 @@ class Take_pic(QWidget):
         self.ask =True
 
     def db_check(self):
-        self.conn = self.connectDB()
-        self.curs = self.conn.cursor()
-        sql1 = "Select max(memberID) from memberdata"
-        self.curs.execute(sql1)
-        result = self.curs.fetchone()
-        self.user_num = result[0] + 1
+        try:
+            self.conn = self.connectDB()
+            self.curs = self.conn.cursor()
+            sql1 = "Select max(memberID) from memberdata"
+            self.curs.execute(sql1)
+            result = self.curs.fetchone()
+            self.user_num = result[0] + 1
+        except:
+            print("DB 연결 실패")
 
     def db_commit(self):
         sql = "INSERT INTO memberdata ( name, password, birthdate, gender, phonenumber) VALUES ( %s, %s, %s, '%s', %s)"

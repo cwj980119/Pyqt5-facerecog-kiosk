@@ -15,6 +15,7 @@ class Main(QWidget):
         self.ui.show()
         self.ui.btn_login.clicked.connect(self.toLogin)
         self.ui.btn_register.clicked.connect(self.toRegister)
+        self.ui.btn_menu.clicked.connect(self.toMenu)
         self.ui.a.clicked.connect(self.tolearning)
         
 
@@ -36,7 +37,8 @@ class Main(QWidget):
 
     def tolearning(self):
         self.ui.hide()
-        self.learning = learning.Learnig(self)
+        test_user = [0,"test","test","test"]
+        self.learning = learning.Learnig(self, test_user)
         
     def toMenu(self, user):
         self.ui.hide()

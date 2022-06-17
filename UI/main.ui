@@ -20,14 +20,14 @@
       <x>150</x>
       <y>200</y>
       <width>600</width>
-      <height>300</height>
+      <height>400</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 30pt &quot;HY궁서B&quot;;</string>
+     <string notr="true">font: 30pt &quot;HY헤드라인M&quot;;</string>
     </property>
     <property name="text">
-     <string>Login</string>
+     <string>AI 주문하기</string>
     </property>
    </widget>
    <widget class="QPushButton" name="btn_register">
@@ -35,15 +35,15 @@
      <rect>
       <x>150</x>
       <y>600</y>
-      <width>600</width>
+      <width>300</width>
       <height>300</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 30pt &quot;HY궁서B&quot;;</string>
+     <string notr="true">font: 20pt &quot;HY헤드라인M&quot;;</string>
     </property>
     <property name="text">
-     <string>Register</string>
+     <string>회원가입</string>
     </property>
    </widget>
    <widget class="QPushButton" name="a">
@@ -57,6 +57,22 @@
     </property>
     <property name="text">
      <string>testbtn</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_register_2">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>600</y>
+      <width>300</width>
+      <height>300</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 20pt &quot;HY헤드라인M&quot;;</string>
+    </property>
+    <property name="text">
+     <string>게스트로 주문하기</string>
     </property>
    </widget>
   </widget>

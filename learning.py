@@ -52,16 +52,27 @@ class Make_model(QThread):
 
 
 class Learnig(QWidget):
-    def __init__(self, main):
+    def __init__(self, main, user):
         QWidget.__init__(self)
         self.main = main
+        self.user = user
         self.ui = uic.loadUi("./UI/learning.ui")
+        self.ui.btn_main.clicked.connect(self.to_main)
+        self.ui.btn_menu.clicked.connect(self.to_menu)
         self.ui.show()
         path = './dataset/train'
         file_list = os.listdir(path)
         self.len = len(file_list)
-        self.init_model()
         #self.init_model()
+        #self.init_model()
+
+    def to_main(self):
+        self.ui.hide()
+        self.main.toMain()
+
+    def to_menu(self):
+        self.ui.hide()
+        self.main.toMenu(self.user)
 
     def learn_model(self):
         self.worker = Make_model(self)

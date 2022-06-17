@@ -107,6 +107,7 @@ class Login(QWidget):
             self.ui.cam_off.clicked.connect(self.close_cam)
             self.ui.show()
         except:
+            print("db연결 실패")
             conn.close()
             self.close()
     def close(self):

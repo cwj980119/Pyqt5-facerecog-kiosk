@@ -16,10 +16,10 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>200</x>
+     <x>100</x>
      <y>150</y>
-     <width>500</width>
-     <height>300</height>
+     <width>700</width>
+     <height>500</height>
     </rect>
    </property>
    <property name="font">
@@ -37,10 +37,37 @@
     <string notr="true">font: 20pt &quot;HY엽서L&quot;;</string>
    </property>
    <property name="text">
-    <string>회원가입을 진행중입니다.</string>
+    <string>회원가입이 완료되었습니다.
+얼굴 등록에는 시간이 필요합니다.</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_main">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>740</y>
+     <width>200</width>
+     <height>100</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>메인메뉴로 돌아가기</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_menu">
+   <property name="geometry">
+    <rect>
+     <x>550</x>
+     <y>740</y>
+     <width>200</width>
+     <height>100</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>주문하러가기</string>
    </property>
   </widget>
  </widget>
